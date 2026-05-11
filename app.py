@@ -1,8 +1,5 @@
 import streamlit as st
-from pyarud.pyarud import ArudAnalyzer
-
-# If the above also fails, try:
-# from pyarud.arud import ArudAnalyzer
+from pyarud.arud import ArudAnalyzer
 
 st.title("📜 Arabic Poetic Analyzer")
 
