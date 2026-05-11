@@ -1,27 +1,20 @@
 import streamlit as st
-from pyarud.arud import ArudAnalyzer
+# Try the submodule path
+try:
+    from pyarud.arud import ArudAnalyzer
+except ImportError:
+    # Fallback/Diagnostic
+    st.error("Could not find ArudAnalyzer. Printing library contents...")
+    import pyarud
+    st.write(dir(pyarud))
+    st.stop()
 
-# Page configuration
-st.set_page_config(page_title="PyArud Poetic Analyzer", page_icon="📜")
+st.title("📜 Arabic Poetic Analyzer")
 
-st.title("📜 PyArud: Arabic Prosody Analyzer")
-st.markdown("Analyze Arabic poetic verses, detect meters (Buhur), and identify variations.")
-
-# User Input
-verse = st.text_input("Enter an Arabic poetic verse:", placeholder="قفا نبك من ذكرى حبيب ومنزل...")
-
+verse = st.text_input("Enter Verse")
 if verse:
     analyzer = ArudAnalyzer()
+    # Note: Ensure the method name is 'analyze' 
+    # (some versions use 'parse' or 'get_meter')
     result = analyzer.analyze(verse)
-    
-    # Display Results
-    st.subheader("Analysis Results")
-    st.write(f"**Detected Meter:** {result.meter_name}")
-    
-    # Display foot-by-foot analysis
-    st.write("**Taf'ila Analysis:**")
-    for foot in result.parts:
-        st.code(f"{foot.tafeela} -> {foot.pattern}")
-        
-    if result.zihaf:
-        st.info(f"Detected Zihaf/Illah: {', '.join(result.zihaf)}")
+    st.write(result)
