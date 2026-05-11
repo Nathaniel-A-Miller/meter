@@ -1,13 +1,8 @@
 import streamlit as st
-# Try the submodule path
-try:
-    from pyarud.arud import ArudAnalyzer
-except ImportError:
-    # Fallback/Diagnostic
-    st.error("Could not find ArudAnalyzer. Printing library contents...")
-    import pyarud
-    st.write(dir(pyarud))
-    st.stop()
+from pyarud.pyarud import ArudAnalyzer
+
+# If the above also fails, try:
+# from pyarud.arud import ArudAnalyzer
 
 st.title("📜 Arabic Poetic Analyzer")
 
