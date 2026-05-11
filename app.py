@@ -1,25 +1,22 @@
 import streamlit as st
 import pyarud
-
-# Access the logic via the module directly
-from pyarud.pyarud import ArudAnalyzer
+from pyarud import ArudAnalyzer
 
 st.title("📜 Arabic Poetic Analyzer")
 
-# Let's add a diagnostic check to see what's actually there
-if st.checkbox("Show Library Debug Info"):
-    st.write("Package path:", pyarud.__file__)
-    st.write("Available sub-modules:", dir(pyarud))
+# This will help us see if the import finally worked
+try:
+    analyzer = ArudAnalyzer()
+    st.success("Library loaded successfully!")
+except Exception as e:
+    st.error(f"Initialization error: {e}")
 
-verse = st.text_input("Enter your verse:", "خليلَيَّ رُبَّ الموتِ فيهِ حياةُ")
+verse = st.text_input("Enter your verse:")
 
 if verse:
     try:
-        # We instantiate the class from the nested module
-        analyzer = ArudAnalyzer()
         result = analyzer.analyze(verse)
-        
-        st.success(f"Meter: {result.meter_name}")
-        st.info(f"Scansion: {result.parts}")
+        st.write(f"**Meter:** {result.meter_name}")
+        st.write(f"**Scansion:** {result.parts}")
     except Exception as e:
-        st.error(f"Error: {e}")
+        st.error(f"Analysis error: {e}")
