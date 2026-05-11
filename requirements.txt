@@ -1,2 +1,2 @@
 streamlit
-pyarud
+git+https://github.com/cnemri/pyarud.git
