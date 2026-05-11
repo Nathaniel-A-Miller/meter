@@ -1,5 +1,5 @@
 import streamlit as st
-from pyarud import ArudAnalyzer
+from pyarud.arud import ArudAnalyzer
 
 # Page configuration
 st.set_page_config(page_title="PyArud Poetic Analyzer", page_icon="📜")
